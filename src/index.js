@@ -8,6 +8,7 @@ dotenv.config();
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.queues = new Map();
+bot.searches = new Map();
 
 const commandFiles = fs
   .readdirSync(path.join(__dirname, "/commands"))
