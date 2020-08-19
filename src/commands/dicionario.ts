@@ -1,4 +1,4 @@
-
+//author: ...
 import request from 'request';
 import type { CustomClient } from '../types/index';
 import type { Message } from 'discord.js';
