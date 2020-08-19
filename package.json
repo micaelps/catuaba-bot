@@ -3,24 +3,41 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon  src/index.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start": "nodemon  src/index.js",
+    "test": "test",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir build --extensions \".ts,.tsx\" --source-maps inline"
+  },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "@types/node": "^14.6.0",
+    "@types/request": "^2.48.5",
+    "@types/ws": "^7.2.6",
+    "@types/yt-search": "^2.0.0",
+    "core-js": "^3.6.5",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
     "yt-search": "^2.1.8",
     "ytdl-core-discord": "^1.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "typescript": "^3.9.7",
     "nodemon": "^2.0.4"
   }
 }
