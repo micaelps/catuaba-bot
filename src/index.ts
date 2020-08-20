@@ -1,18 +1,21 @@
-const Discord = require("discord.js");
-const dotenv = require("dotenv");
-const fs = require("fs");
-const path = require("path");
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import dotenv from 'dotenv';
+import type { CustomClient } from './types/index';
+import Discord from 'discord.js';
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
-const bot = new Discord.Client();
+const bot: CustomClient = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.queues = new Map();
 bot.searches = new Map();
 
 const commandFiles = fs
   .readdirSync(path.join(__dirname, "/commands"))
-  .filter((filename) => filename.endsWith(".js"));
+  .filter((filename) => filename.endsWith(".ts"));
 
 for (var filename of commandFiles) {
   const command = require(`./commands/${filename}`);
@@ -27,13 +30,13 @@ bot.on("ready", function () {
 
 bot.on("message", (msg) => {
 
-  if (msg.content.startsWith(process.env.PREFIX)){
+  if (msg.content.startsWith(process.env.PREFIX || '--')) {
 
-    const args = msg.content.slice(process.env.PREFIX.length).split(" ");
+    const args = msg.content.slice(process.env.PREFIX?.length || 2).split(" ");
     const command = args.shift();
-  
+
     try {
-      bot.commands.get(command).execute(bot, msg, args);
+      bot.commands?.get(command || `help`).execute(bot, msg, args);
     } catch (e) {
       console.error(e);
       return msg.reply("de onde tu tirou isso? comando inexistente mizera!");
