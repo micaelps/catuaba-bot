@@ -15,7 +15,7 @@ bot.searches = new Map();
 
 const commandFiles = fs
   .readdirSync(path.join(__dirname, "/commands"))
-  .filter((filename) => filename.endsWith(".ts"));
+  .filter((filename) => filename.endsWith("."+process.env.EXTENSION_DEFAULT));
 
 for (var filename of commandFiles) {
   const command = require(`./commands/${filename}`);
