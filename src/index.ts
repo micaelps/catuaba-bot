@@ -31,23 +31,13 @@ bot.on("ready", function () {
 bot.on("message", (msg) => {
 
   if (msg.content.startsWith(process.env.PREFIX || '--')) {
-
     const args = msg.content.slice(2).split(" ");
     const command = args.shift();
-
     try {
-      if(typeof bot.commands !== 'undefined'){
-        bot.commands.get(command || `help`).execute(bot, msg, args);
-      }
+      bot.commands?.get(command || `help`).execute(bot, msg, args);
     } catch (e) {
       console.error(e);
       return msg.reply("de onde tu tirou isso? comando inexistente mizera!");
     }
-
-
-
-
-
-
   }
 });
