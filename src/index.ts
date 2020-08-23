@@ -32,7 +32,7 @@ bot.on("message", (msg) => {
 
   if (msg.content.startsWith(process.env.PREFIX || '--')) {
 
-    const args = msg.content.slice(process.env.PREFIX?.length || 2).split(" ");
+    const args = msg.content.slice(2).split(" ");
     const command = args.shift();
 
     try {
