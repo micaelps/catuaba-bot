@@ -36,7 +36,9 @@ bot.on("message", (msg) => {
     const command = args.shift();
 
     try {
-      bot.commands?.get(command || `help`).execute(bot, msg, args);
+      if(typeof bot.commands !== 'undefined'){
+        bot.commands.get(command || `help`).execute(bot, msg, args);
+      }
     } catch (e) {
       console.error(e);
       return msg.reply("de onde tu tirou isso? comando inexistente mizera!");
